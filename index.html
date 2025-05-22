@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Temperature Checker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: orange;
+      /* Default */
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.5s ease;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>Enter Temperature (°C)</h2>
+    <input type="number" id="tempInput" placeholder="e.g. 25" />
+    <br />
+    <button onclick="checkTemperature()">Check</button>
+    <div id="message">Low Temperature</div>
+  </div>
+
+  <script>
+    function checkTemperature() {
+      const input = document.getElementById('tempInput');
+      const message = document.getElementById('message');
+      const temp = input.valueAsNumber;
+
+      if (isNaN(temp)) {
+        alert("⚠️ Please enter a valid number");
+        message.textContent = 'Low Temperature';
+        document.body.style.backgroundColor = 'orange'
+        return;
+      }
+
+      if (temp < 20) {
+        document.body.style.backgroundColor = 'orange';
+        message.textContent = "Low Temperature!";
+        message.style.color = 'black';
+      } else if (temp > 20 && temp < 50) {
+        document.body.style.backgroundColor = 'green';
+        message.textContent = "Normal Temperature";
+        message.style.color = 'black';
+      } else {
+        document.body.style.backgroundColor = 'red';
+        message.textContent = "High Temperature";
+        message.style.color = 'black';
+      }
+
+      input.value = ''; // clear input
+    }
+  </script>
+
+</body>
+
+</html>
